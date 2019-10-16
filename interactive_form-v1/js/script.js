@@ -1,14 +1,14 @@
 //Set focus to first input field ("Name") at page load
 
 $(function() {
-    $( '#name' ).focus();
+  $( '#name' ).focus();
   
 
   //Hide text input for 'other' element initially, show textbox when 'other' is selected (change event)
     
   $(function() {
     var title = $('#title'),
-    onChange = function(event) {
+    onChange = function() {
         if ($(this).val() === 'other') {
             $('#other-title').show();
             $('#other-title').focus().select();
@@ -18,13 +18,15 @@ $(function() {
     };
     onChange.apply(title.get(0));
     title.change(onChange);
-}); 
+  });
+
+////////T-shirt section//////////   
 
 //Hide color menu so that user can only select valid option combinations for "Design" and "Color" fields 
 //add HTML prompt instructing user to choose a T-shirt theme
- $('#color').html("<option value='none'>Please select a T-shirt Theme</option>");
- var themeSelected = false;
-$( "#design").change(function() {
+  $('#color').html("<option value='none'>Please select a T-shirt Theme</option>");
+    var themeSelected = false;
+    $( "#design").change(function() {
   // if "Theme- JS Puns" is selected show relevant color options
       if ($("#design option:selected").text() == "Theme - JS Puns") {
           $('#colors-js-puns').show();
@@ -46,6 +48,42 @@ $( "#design").change(function() {
               themeSelected = true;
               return $('#color').html("<option value='none'>Please select a T-shirt Theme</option>");
       }
-});
+    });
 
+//////////Activities section/////////////
+ //create new DOM element to display total cost and append it to ' .activities' section
+    let totalCostCalc = 0;
+    var totalCostCalcElem = $('<span></span>').html('<b>Total: $' + totalCostCalc + '</b>');
+
+    $('.activities').append(totalCostCalcElem);
+ 
+ //Update and display the total cost of the activities selected
+    $('.activities').change(function(event) {
+        const checked = event.target;
+        let cost = parseInt($(checked).attr('data-cost').replace(/\D(\d+)/, '$1'));
+    if( $(checked).is(':checked')) {
+        totalCostCalc += cost;
+        totalCostCalcElem.html('<b>Total: $' + totalCostCalc + '</b>');
+    } else {
+        totalCostCalc -= cost;
+     totalCostCalcElem.html('<b>Total: $' + totalCostCalc + '</b>');
+    }
+
+// Don't allow user to select conflicting activities
+        var activitiesList = $('.activities input');
+
+        $(activitiesList).each(function(index) {
+ 
+        if( $(activitiesList[index]).attr('data-day-and-time') === $(checked).attr('data-day-and-time') && checked != activitiesList[index] ) {
+            if($(activitiesList[index]).attr('disabled')) { 
+                $(activitiesList[index]).attr('disabled', false);
+            } else {
+                $(activitiesList[index]).attr('disabled', true); 
+            }
+        }
+        });
+
+        
+    });
+    
 });
