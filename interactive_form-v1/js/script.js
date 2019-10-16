@@ -22,13 +22,34 @@ $(function() {
 
 ////////T-shirt section//////////   
 
-//Hide color menu so that user can only select valid option combinations for "Design" and "Color" fields 
-//add HTML prompt instructing user to choose a T-shirt theme
+//Hide color menu until theme is chosen
+//Only allow user to view and select correct color options based on theme choice
+//Add un-selectable HTML prompt instructing user to choose a T-shirt theme if none is selected after color menu is revealed
+
+$("#colors-js-puns").hide();
+$('#design').change(function(event){
+    $("#colors-js-puns").show();
+    
+    if ($(this).val() == "js puns") {
+       
+       $('#color').children().hide();
+       $('#color').children().slice(0,3).show();
+       $('#color').val("cornflowerblue");
+    } else if ($(this).val() == "heart js"){
+      
+      $('#color').children().hide();
+      $('#color').children().slice(-3).show();
+      $('#color').val("tomato");
+    } else {
+      $('#color').children().show();
+    }
+  });
+
   $('#color').html("<option value='none'>Please select a T-shirt Theme</option>");
     var themeSelected = false;
     $( "#design").change(function() {
   // if "Theme- JS Puns" is selected show relevant color options
-      if ($("#design option:selected").text() == "Theme - JS Puns") {
+    if ($("#design option:selected").text() == "Theme - JS Puns") {
           $('#colors-js-puns').show();
           $("#color").html("<option value='cornflowerblue'>Cornflower Blue</option><option value='darkslategrey'>Dark Slate Grey</option><option value='gold'>Gold</option>");
           themeSelected = true;
@@ -119,5 +140,8 @@ $(function() {
 
  });
 
+
+
+/////////Form Validation//////////
 
 });
