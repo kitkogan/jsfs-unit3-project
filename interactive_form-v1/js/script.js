@@ -51,7 +51,7 @@ $(function() {
     });
 
 //////////Activities section/////////////
- //create new DOM element to display total cost and append it to ' .activities' section
+//create new DOM element to display total cost and append it to ' .activities' section
     let totalCostCalc = 0;
     var totalCostCalcElem = $('<span></span>').html('<b>Total: $' + totalCostCalc + '</b>');
 
@@ -69,7 +69,7 @@ $(function() {
      totalCostCalcElem.html('<b>Total: $' + totalCostCalc + '</b>');
     }
 
-// Don't allow user to select conflicting activities
+ //Don't allow user to select conflicting activities
         var activitiesList = $('.activities input');
 
         $(activitiesList).each(function(index) {
@@ -82,8 +82,42 @@ $(function() {
             }
         }
         });
-
-        
     });
-    
+
+/////////Payment Info/////////
+
+ //Display payment sections based on the paymeny option chosen from select menu
+ //CC payment option shown by default and hide PP and BC options
+
+ //'Select Payment Method' should be hidden from dropdown, credit Card option is default selection
+ $('option[value="select method"]').attr('hidden', true);
+
+ $('option[value="Credit Card"]').attr('selected', true);
+ const ccPayDiv = $('#credit-card');
+ const bitPayDiv = $('#bitcoin').hide();
+ const ppPayDiv = $('#paypal').hide();
+
+ //Event handler listens for changes in payment selection
+ //Shows info for chosen method and hides others
+
+ $('#payment').on('change', function (event) {
+     const selected = $(event.target);
+     
+     if (selected.val() === "Credit Card") {
+         ccPayDiv.show();
+         bitPayDiv.hide();
+         ppPayDiv.hide();
+     } else if (selected.val() === "PayPal") {
+         ppPayDiv.show();
+         ccPayDiv.hide();
+         bitPayDiv.hide();    
+     } else if (selected.val() === "Bitcoin") {
+         bitPayDiv.show();
+         ccPayDiv.hide();
+         ppPayDiv.hide();
+     }
+
+ });
+
+
 });
