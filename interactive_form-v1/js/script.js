@@ -166,8 +166,38 @@ $('#design').change(function(event){
 
    //Event handler listens for changes in Name field
    //Displays error message if validation rejected
+
     $('#name').on('focusout', function () {
         validName();
+    });
+
+    //A valid email address is required
+
+    function validEmail() {
+        const regexEmail = /^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/;
+
+        if (!(regexEmail.test($("#mail").val()))) {
+            $('#mail').css('border-color', 'red');
+            $('[for="mail"] span').remove();
+            $('[for="mail"]').append('<span> Valid email address required to proceed </span>').css('color', '#B20000');
+            return false;
+        } else {
+            $('#mail').css('border-color', '#6F9DDC');
+            $('[for="mail"] span').remove();
+            $('[for="mail"]').css('color', '#a9a9a9');
+            return true;
+        }
+    }
+
+    //Event handler listens for changes in Email field
+    //Displays error message if a valid email is not provided
+    
+    $('#mail').keyup(function () {
+        validEmail();
+    });
+
+    $('#mail').on('change', function () {
+        validEmail();
     });
 
     //At least one activity must be selected
@@ -184,12 +214,16 @@ $('#design').change(function(event){
 
     }
 
-
     //Event handler listens for changes in Activities list
     //Displays error message if no activities are selected
 
     $('.activities').on('click', function () {
         validActivities();
     });
+
+    
+
+    
+   
 
 });
