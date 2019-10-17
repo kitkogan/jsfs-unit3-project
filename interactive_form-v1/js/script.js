@@ -144,4 +144,31 @@ $('#design').change(function(event){
 
 /////////Form Validation//////////
 
+  // Name field can't be blank
+
+    function validName() {
+        const inputName = $('#name');
+        const regexName = /^[a-zA-Z]+$/;
+
+        if (!(regexName.test($("#name").val()))) {
+            
+            inputName.css('border-color', '#B20000');
+            $('[for="name"] span').remove(); //
+            $('[for="name"]').append('<span> Please type your name </span>').css('color', '#B20000');
+            return false;
+        } else {
+            inputName.css('border-color', '#6F9DDC'); 
+            $('[for="name"] span').remove(); 
+            $('[for="name"]').css('color', '#a9a9a9');
+            return true;
+        }
+    }
+
+ //Event handler listens for changes in Name field
+ //Displays error message if validation rejected
+    $('#name').on('focusout', function () {
+        validName();
+    });
+
+    
 });
