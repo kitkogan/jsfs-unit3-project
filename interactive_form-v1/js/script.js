@@ -178,7 +178,7 @@ $('#design').change(function(event){
             return true;
         } else {
             $('.activities legend span').remove();
-            $('.activities legend').append('<span>: Please select at least one activity from list</span>').css('color', '#6F9DDC');
+            $('.activities legend').append('<span>: Please select at least one activity from list</span>').css('color', '#B20000');
         return false;
         }
 
