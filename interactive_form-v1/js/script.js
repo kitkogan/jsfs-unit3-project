@@ -111,34 +111,34 @@ $('#design').change(function(event){
  //CC payment option shown by default and hide PP and BC options
 
  //'Select Payment Method' should be hidden from dropdown, credit Card option is default selection
- $('option[value="select method"]').attr('hidden', true);
+    $('option[value="select method"]').attr('hidden', true);
 
- $('option[value="Credit Card"]').attr('selected', true);
- const ccPayDiv = $('#credit-card');
- const bitPayDiv = $('#bitcoin').hide();
- const ppPayDiv = $('#paypal').hide();
+    $('option[value="Credit Card"]').attr('selected', true);
+    const ccPayDiv = $('#credit-card');
+    const bitPayDiv = $('#bitcoin').hide();
+    const ppPayDiv = $('#paypal').hide();
 
  //Event handler listens for changes in payment selection
  //Shows info for chosen method and hides others
 
- $('#payment').on('change', function (event) {
-     const selected = $(event.target);
+    $('#payment').on('change', function (event) {
+        const selected = $(event.target);
      
-     if (selected.val() === "Credit Card") {
-         ccPayDiv.show();
-         bitPayDiv.hide();
-         ppPayDiv.hide();
-     } else if (selected.val() === "PayPal") {
-         ppPayDiv.show();
-         ccPayDiv.hide();
-         bitPayDiv.hide();    
-     } else if (selected.val() === "Bitcoin") {
-         bitPayDiv.show();
-         ccPayDiv.hide();
-         ppPayDiv.hide();
-     }
+        if (selected.val() === "Credit Card") {
+            ccPayDiv.show();
+            bitPayDiv.hide();
+            ppPayDiv.hide();
+        } else if (selected.val() === "PayPal") {
+            ppPayDiv.show();
+            ccPayDiv.hide();
+            bitPayDiv.hide();    
+        } else if (selected.val() === "Bitcoin") {
+            bitPayDiv.show();
+            ccPayDiv.hide();
+            ppPayDiv.hide();
+        }
 
- });
+    });
 
 
 
@@ -260,7 +260,7 @@ $('#design').change(function(event){
         });
     
 
-    // Zip code must contain 5 numbers
+    //Zip code must contain 5 numbers
 
     function validZip() {
         const regexZip = /^[0-9]+$/;
@@ -286,6 +286,30 @@ $('#design').change(function(event){
     });
 
 
-   
+    //CVV must contain 3 numbers
+
+        function validCVV() {
+        const regexCVV = /^[0-9]{3}$/;
+
+        if (!(regexCVV.test($('#cvv').val()))) {
+            $('#cvv').css('border-color', '#B20000');
+            $('[for="cvv"] span').remove();
+            $('[for="cvv"]').append('<span> Please enter a valid CVV </span>').css('color', '#B20000');
+            return false;
+        } else {
+            $('#zip').css('border-color', '#6F9DDC');
+            $('[for="cvv"] span').remove();
+            $('[for="cvv"]').css('color', '#a9a9a9');
+            return true;
+        }
+    }
+
+    //Event handler listens for changes in CVV field
+    //Displays error message if validation rejected
+
+    $('#cvv').on('focusout', function () {
+        validCVV();
+    });
+
 
 });
