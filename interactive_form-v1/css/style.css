@@ -17,7 +17,7 @@ button {
 body {
   font: 1em/1.5;
   color: rgba(6, 49, 68, 0.9);
-	background: #CDE0FB;
+	background: rgb(148, 10, 202);
 }
 
 header {
@@ -40,7 +40,7 @@ a {
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #9BBEEF;
+	background: rgb(206, 20, 212);
 	border: 2px solid rgba(8, 63, 87, 0.7);
 	border-radius: 3px;
 }
@@ -90,14 +90,14 @@ input {
 	font-weight: 500;
 	padding: .8em;
 	background: #e9f6fb;
-	border: 2px solid #6F9DDC;
+	border: 2px solid #794880;;
 	border-radius: 3px;
 	outline: none;
 }
 
 input:focus {
 	background: #fff;
-	border-color: #5e97b0;
+	border-color: #794880;
 	transition: border-color .4s, background-color .4s;
 }
 
@@ -109,7 +109,7 @@ input[type="radio"] {
 button {
 	color: #fff;
 	padding: .55em 1.25em;
-	background: #083f57;
+	background: #461264;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
 	border: 2px solid black;
@@ -118,7 +118,7 @@ button {
 }
 
 button:hover {
-	background: #6F9DDC;
+	background: #794880;;
 }
 
 input, 

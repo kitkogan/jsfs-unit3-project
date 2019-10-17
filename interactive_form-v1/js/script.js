@@ -155,10 +155,10 @@ $('#design').change(function(event){
             
             inputName.css('border-color', '#B20000');
             $('[for="name"] span').remove(); //
-            $('[for="name"]').append('<span> Please type your name </span>').css('color', '#B20000');
+            $('[for="name"]').append('<span><b> Please type your name </b></span>').css('color', '#B20000');
             return false;
         } else {
-            inputName.css('border-color', '#6F9DDC'); 
+            inputName.css('border-color', '#794880'); 
             $('[for="name"] span').remove(); 
             $('[for="name"]').css('color', '#000000');
             return true;
@@ -180,10 +180,10 @@ $('#design').change(function(event){
         if (!(regexEmail.test($("#mail").val()))) {
             $('#mail').css('border-color', '#B20000');
             $('[for="mail"] span').remove();
-            $('[for="mail"]').append('<span> Valid email address required to proceed</span>').css('color', '#B20000');
+            $('[for="mail"]').append('<span><b> Valid email address required to proceed </b></span>').css('color', '#B20000');
             return false;
         } else {
-            $('#mail').css('border-color', '#6F9DDC');
+            $('#mail').css('border-color', '#794880');
             $('[for="mail"] span').remove();
             $('[for="mail"]').css('color', '#000000');
             return true;
@@ -230,24 +230,24 @@ $('#design').change(function(event){
         if ($('#cc-num').val().length < 13) {
             $('#cc-num').css('border-color', '#B20000');
             $('[for="cc-num"] span').remove();
-            $('[for="cc-num"]').append('<span> Credit card number should be at least 13 digits long </span>').css('color', '#B20000');
+            $('[for="cc-num"]').append('<span><b> Credit card number should be at least 13 digits long </b></span>').css('color', '#B20000');
             return false;
         } else if ($('#cc-num').val().length > 16) {
             $('#cc-num').css('border-color', '#B20000');
             $('[for="cc-num"] span').remove();
-            $('[for="cc-num"]').append('<span> Credit card number should be no more than 16 digits long </span>').css('color', '#B20000');
+            $('[for="cc-num"]').append('<span><b> Credit card number should be no more than 16 digits long </b></span>').css('color', '#B20000');
             return false;
         }
         else {
             if (regexCC.test($('#cc-num').val())) {
-            $('#cc-num').css('border-color', '#6F9DDC');
+            $('#cc-num').css('border-color', '#794880');
             $('[for="cc-num"] span').remove();
             $('[for="cc-num"]').css('color', '#000000');
             return true;
         } else {
             $('#cc-num').css('border-color', '#B20000');
             $('[for="cc-num"] span').remove();
-            $('[for="cc-num"]').append('<span> Please enter a valid credit card number </span>').css('color', '#B20000');
+            $('[for="cc-num"]').append('<span><b> Please enter a valid credit card number </b></span>').css('color', '#B20000');
         return false;
             }
         }
@@ -269,10 +269,10 @@ $('#design').change(function(event){
         if (!(regexZip.test($('#zip').val()))) {
             $('#zip').css('border-color', '#B20000');
             $('[for="zip"] span').remove();
-            $('[for="zip"]').append('<span> Please enter a valid zip code </span>').css('color', '#B20000');
+            $('[for="zip"]').append('<span><b> Please enter a valid zip code </b></span>').css('color', '#B20000');
             return false;
         } else {
-            $('#zip').css('border-color', '#6F9DDC');
+            $('#zip').css('border-color', '#794880;');
             $('[for="zip"] span').remove();
             $('[for="zip"]').css('color', '#000000');
             return true;
@@ -295,10 +295,10 @@ $('#design').change(function(event){
         if (!(regexCVV.test($('#cvv').val()))) { 
             $('#cvv').css('border-color', '#B20000');
             $('[for="cvv"] span').remove();
-            $('[for="cvv"]').append('<span> Please enter a valid CVV </span>').css('color', '#B20000');
+            $('[for="cvv"]').append('<span><b> Please enter a valid CVV </b></span>').css('color', '#B20000');
             return false;
         } else {
-            $('#zip').css('border-color', '#6F9DDC');
+            $('#zip').css('border-color', '#794880');
             $('[for="cvv"] span').remove();
             $('[for="cvv"]').css('color', '#000000');
             return true;
