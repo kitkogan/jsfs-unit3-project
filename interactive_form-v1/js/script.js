@@ -146,6 +146,7 @@ $('#design').change(function(event){
   
  //Name field must contain at leasst one letter
 
+
     function validName() {
         const inputName = $('#name');
         const regexName = /^[a-zA-Z]+$/;
@@ -174,7 +175,7 @@ $('#design').change(function(event){
     //A validly formatted email address is required
 
     function validEmail() {
-        const regexEmail = /^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/;
+        const regexEmail = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         if (!(regexEmail.test($("#mail").val()))) {
             $('#mail').css('border-color', '#B20000');
@@ -197,8 +198,9 @@ $('#design').change(function(event){
     });
 
     
-    //At least one item from Activities list must be selected
-    
+   //At least one item from Activities list must be selected
+
+
     function validActivities() {
         if($('input[type="checkbox"]').is(':checked')) {
             $('.activities legend span').remove();
@@ -221,7 +223,7 @@ $('#design').change(function(event){
 
 
     //CC requires >= 13 numbers, <= 16 numbers
-    
+
     function validCC() {
         const regexCC = /^(?:[0-9]{13,16})?$/;
 
@@ -262,7 +264,7 @@ $('#design').change(function(event){
     //Zip code requires 5 digits
 
     function validZip() {
-        const regexZip = /^[0-9]+$/;
+        const regexZip = /^\d{5}$/;
 
         if (!(regexZip.test($('#zip').val()))) {
             $('#zip').css('border-color', '#B20000');
@@ -290,7 +292,7 @@ $('#design').change(function(event){
     function validCVV() {
         const regexCVV = /^[0-9]{3}$/;
 
-        if (!(regexCVV.test($('#cvv').val()))) { //if the cvv testing the value of the input is false
+        if (!(regexCVV.test($('#cvv').val()))) { 
             $('#cvv').css('border-color', '#B20000');
             $('[for="cvv"] span').remove();
             $('[for="cvv"]').append('<span> Please enter a valid CVV </span>').css('color', '#B20000');
@@ -314,6 +316,7 @@ $('#design').change(function(event){
     //Tests to ensure consitions for form validation on submit, preventing default behaviors
     //CC form fields only required when CC payment option is selected
 
+  
     const validForm = $('form');
 
     validForm.on('submit', function(event){
@@ -343,5 +346,6 @@ $('#design').change(function(event){
         }
 
     });   
-  
+
+
 });
