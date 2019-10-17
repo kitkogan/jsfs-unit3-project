@@ -144,7 +144,7 @@ $('#design').change(function(event){
 
 /////////Form Validation//////////
 
-  // Name field can't be blank
+  //Name field can't be blank
 
     function validName() {
         const inputName = $('#name');
@@ -164,11 +164,32 @@ $('#design').change(function(event){
         }
     }
 
- //Event handler listens for changes in Name field
- //Displays error message if validation rejected
+   //Event handler listens for changes in Name field
+   //Displays error message if validation rejected
     $('#name').on('focusout', function () {
         validName();
     });
 
+    //At least one activity must be selected
     
+     function validActivities() {
+        if($('input[type="checkbox"]').is(':checked')) {
+            $('.activities legend span').remove();
+            return true;
+        } else {
+            $('.activities legend span').remove();
+            $('.activities legend').append('<span>: Please select at least one activity from list</span>').css('color', '#6F9DDC');
+        return false;
+        }
+
+    }
+
+
+    //Event handler listens for changes in Activities list
+    //Displays error message if no activities are selected
+
+    $('.activities').on('click', function () {
+        validActivities();
+    });
+
 });
