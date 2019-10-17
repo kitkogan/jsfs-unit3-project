@@ -177,7 +177,7 @@ $('#design').change(function(event){
         const regexEmail = /^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/;
 
         if (!(regexEmail.test($("#mail").val()))) {
-            $('#mail').css('border-color', 'red');
+            $('#mail').css('border-color', '#B20000');
             $('[for="mail"] span').remove();
             $('[for="mail"]').append('<span> Valid email address required to proceed </span>').css('color', '#B20000');
             return false;
@@ -191,7 +191,7 @@ $('#design').change(function(event){
 
     //Event handler listens for changes in Email field
     //Displays error message if a valid email is not provided
-    
+
     $('#mail').keyup(function () {
         validEmail();
     });
@@ -221,6 +221,43 @@ $('#design').change(function(event){
         validActivities();
     });
 
+        //Credit card must contain min 13/max 16 numbers
+
+    function validCC() {
+        const regexCC = /^(?:[0-9]{13,16})?$/;
+    
+        if ($('#cc-num').val().length < 13) {
+            $('#cc-num').css('border-color', '#B20000');
+            $('[for="cc-num"] span').remove();
+            $('[for="cc-num"]').append('<span> Credit card number should be at least 13 digits long </span>').css('color', '#B20000');
+              return false;
+           } else if ($('#cc-num').val().length > 16) {
+               $('#cc-num').css('border-color', '#B20000');
+               $('[for="cc-num"] span').remove();
+               $('[for="cc-num"]').append('<span> Credit card number should be no more than 16 digits long </span>').css('color', '#B20000');
+               return false;
+           }
+           else {
+               if (regexCC.test($('#cc-num').val())) { 
+               $('#cc-num').css('border-color', '#6F9DDC');
+               $('[for="cc-num"] span').remove();
+               $('[for="cc-num"]').css('color', '#a9a9a9');
+               return true;
+          } else {
+              $('#cc-num').css('border-color', '#6F9DDC');
+              $('[for="cc-num"] span').remove();
+              $('[for="cc-num"]').append('<span> Please enter a valid credit card number </span>').css('color', '#B20000');
+           return false;
+          }
+         }
+     }
+    
+        //Event handler listens for changes in CC field
+       //Displays error message if CC validation rejected
+    
+        $('#cc-num').on('focusout', function () {
+            validCC();
+        });
     
 
     
