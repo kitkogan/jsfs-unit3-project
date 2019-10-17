@@ -260,7 +260,32 @@ $('#design').change(function(event){
         });
     
 
-    
+    // Zip code must contain 5 numbers
+
+    function validZip() {
+        const regexZip = /^[0-9]+$/;
+
+        if (!(regexZip.test($('#zip').val()))) {
+            $('#zip').css('border-color', '#B20000');
+            $('[for="zip"] span').remove();
+            $('[for="zip"]').append('<span> Please enter a valid zip code </span>').css('color', '#B20000');
+            return false;
+        } else {
+            $('#zip').css('border-color', '#6F9DDC');
+            $('[for="zip"] span').remove();
+            $('[for="zip"]').css('color', '#a9a9a9');
+            return true;
+        }
+    }
+
+    //Event handler listens for changes in Zip field
+    //Displays error if validation rejected
+
+    $('#zip').on('focusout', function () {
+        validZip();
+    });
+
+
    
 
 });
