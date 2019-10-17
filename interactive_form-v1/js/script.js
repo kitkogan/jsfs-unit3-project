@@ -143,8 +143,8 @@ $('#design').change(function(event){
 
 
 /////////Form Validation//////////
-
-  //Name field can't be blank
+  
+ //Name field must contain at leasst one letter
 
     function validName() {
         const inputName = $('#name');
@@ -159,19 +159,19 @@ $('#design').change(function(event){
         } else {
             inputName.css('border-color', '#6F9DDC'); 
             $('[for="name"] span').remove(); 
-            $('[for="name"]').css('color', '#a9a9a9');
+            $('[for="name"]').css('color', '#000000');
             return true;
         }
     }
 
-   //Event handler listens for changes in Name field
-   //Displays error message if validation rejected
+    //Event handler listens for changes in Name field
+    //Displays error message if validation rejected
 
     $('#name').on('focusout', function () {
         validName();
     });
 
-    //A valid email address is required
+    //A validly formatted email address is required
 
     function validEmail() {
         const regexEmail = /^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/;
@@ -179,88 +179,87 @@ $('#design').change(function(event){
         if (!(regexEmail.test($("#mail").val()))) {
             $('#mail').css('border-color', '#B20000');
             $('[for="mail"] span').remove();
-            $('[for="mail"]').append('<span> Valid email address required to proceed </span>').css('color', '#B20000');
+            $('[for="mail"]').append('<span> Valid email address required to proceed</span>').css('color', '#B20000');
             return false;
         } else {
             $('#mail').css('border-color', '#6F9DDC');
             $('[for="mail"] span').remove();
-            $('[for="mail"]').css('color', '#a9a9a9');
+            $('[for="mail"]').css('color', '#000000');
             return true;
         }
     }
 
-    //Event handler listens for changes in Email field
+     //Event handler listens for changes in Email field
     //Displays error message if a valid email is not provided
 
-    $('#mail').keyup(function () {
+    $('#mail').on('focusout', function () {
         validEmail();
     });
 
-    $('#mail').on('change', function () {
-        validEmail();
-    });
-
-    //At least one activity must be selected
     
-     function validActivities() {
+    //At least one item from Activities list must be selected
+    
+    function validActivities() {
         if($('input[type="checkbox"]').is(':checked')) {
             $('.activities legend span').remove();
             return true;
         } else {
             $('.activities legend span').remove();
-            $('.activities legend').append('<span>: Please select at least one activity from list</span>').css('color', '#B20000');
+            $('.activities legend').append('<span>: Please select at least one activity from list </span>').css('color', '#B20000');
         return false;
         }
 
     }
 
+
     //Event handler listens for changes in Activities list
-    //Displays error message if no activities are selected
+    //Displays error message if validation rejected
 
     $('.activities').on('click', function () {
         validActivities();
     });
 
-        //Credit card must contain min 13/max 16 numbers
 
+    //CC requires >= 13 numbers, <= 16 numbers
+    
     function validCC() {
         const regexCC = /^(?:[0-9]{13,16})?$/;
-    
+
         if ($('#cc-num').val().length < 13) {
             $('#cc-num').css('border-color', '#B20000');
             $('[for="cc-num"] span').remove();
             $('[for="cc-num"]').append('<span> Credit card number should be at least 13 digits long </span>').css('color', '#B20000');
-              return false;
-           } else if ($('#cc-num').val().length > 16) {
-               $('#cc-num').css('border-color', '#B20000');
-               $('[for="cc-num"] span').remove();
-               $('[for="cc-num"]').append('<span> Credit card number should be no more than 16 digits long </span>').css('color', '#B20000');
-               return false;
-           }
-           else {
-               if (regexCC.test($('#cc-num').val())) { 
-               $('#cc-num').css('border-color', '#6F9DDC');
-               $('[for="cc-num"] span').remove();
-               $('[for="cc-num"]').css('color', '#a9a9a9');
-               return true;
-          } else {
-              $('#cc-num').css('border-color', '#6F9DDC');
-              $('[for="cc-num"] span').remove();
-              $('[for="cc-num"]').append('<span> Please enter a valid credit card number </span>').css('color', '#B20000');
-           return false;
-          }
-         }
-     }
-    
-        //Event handler listens for changes in CC field
-       //Displays error message if CC validation rejected
-    
-        $('#cc-num').on('focusout', function () {
-            validCC();
-        });
-    
+            return false;
+        } else if ($('#cc-num').val().length > 16) {
+            $('#cc-num').css('border-color', '#B20000');
+            $('[for="cc-num"] span').remove();
+            $('[for="cc-num"]').append('<span> Credit card number should be no more than 16 digits long </span>').css('color', '#B20000');
+            return false;
+        }
+        else {
+            if (regexCC.test($('#cc-num').val())) {
+            $('#cc-num').css('border-color', '#6F9DDC');
+            $('[for="cc-num"] span').remove();
+            $('[for="cc-num"]').css('color', '#000000');
+            return true;
+        } else {
+            $('#cc-num').css('border-color', '#B20000');
+            $('[for="cc-num"] span').remove();
+            $('[for="cc-num"]').append('<span> Please enter a valid credit card number </span>').css('color', '#B20000');
+        return false;
+            }
+        }
+    }
 
-    //Zip code must contain 5 numbers
+    //Event handler listens for changes in CC field
+    //Displays error message if validation rejected
+
+    $('#cc-num').on('focusout', function () {
+        validCC();
+    });
+
+
+    //Zip code requires 5 digits
 
     function validZip() {
         const regexZip = /^[0-9]+$/;
@@ -273,25 +272,25 @@ $('#design').change(function(event){
         } else {
             $('#zip').css('border-color', '#6F9DDC');
             $('[for="zip"] span').remove();
-            $('[for="zip"]').css('color', '#a9a9a9');
+            $('[for="zip"]').css('color', '#000000');
             return true;
         }
     }
 
-    //Event handler listens for changes in Zip field
-    //Displays error if validation rejected
+    //Event handler listens for changes is Zip code field
+    //Displays error message if validation rejected
 
     $('#zip').on('focusout', function () {
         validZip();
     });
 
 
-    //CVV must contain 3 numbers
+    //CVV requires 3 numbers for validation
 
-        function validCVV() {
+    function validCVV() {
         const regexCVV = /^[0-9]{3}$/;
 
-        if (!(regexCVV.test($('#cvv').val()))) {
+        if (!(regexCVV.test($('#cvv').val()))) { //if the cvv testing the value of the input is false
             $('#cvv').css('border-color', '#B20000');
             $('[for="cvv"] span').remove();
             $('[for="cvv"]').append('<span> Please enter a valid CVV </span>').css('color', '#B20000');
@@ -299,17 +298,50 @@ $('#design').change(function(event){
         } else {
             $('#zip').css('border-color', '#6F9DDC');
             $('[for="cvv"] span').remove();
-            $('[for="cvv"]').css('color', '#a9a9a9');
+            $('[for="cvv"]').css('color', '#000000');
             return true;
         }
     }
 
     //Event handler listens for changes in CVV field
-    //Displays error message if validation rejected
+    //Displays error message if CVV is rejected
 
     $('#cvv').on('focusout', function () {
         validCVV();
-    });
+    })
 
 
+    //Tests to ensure consitions for form validation on submit, preventing default behaviors
+    //CC form fields only required when CC payment option is selected
+
+    const validForm = $('form');
+
+    validForm.on('submit', function(event){
+
+        if (validName() === false) { 
+            event.preventDefault();
+        } 
+        
+        if (validEmail() === false) {
+            event.preventDefault();
+        }
+
+        if (validActivities() === false) {
+            event.preventDefault();
+        }
+
+        if ($('[value="Credit Card"]').is(':selected')) { 
+            if (validCC() === false) {
+                event.preventDefault();
+            }
+            if (validZip() === false) {
+                event.preventDefault();
+            }
+            if (validCVV() === false) {
+                event.preventDefault();
+            }
+        }
+
+    });   
+  
 });
