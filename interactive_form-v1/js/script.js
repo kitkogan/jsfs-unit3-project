@@ -2,49 +2,28 @@
 
 //Set focus to first input field ("Name") at page load
 
-$(function() {
-  $( '#name' ).focus();
+$(function(){
+    $("#name").focus();
+  
   
  //Hide text input for 'other' element initially, show textbox when 'other' is selected (change event)
-    
-  $(function() {
-    var title = $('#title'),
-    onChange = function() {
-        if ($(this).val() === 'other') {
-            $('#other-title').show();
-            $('#other-title').focus().select();
-        } else {
-            $('#other-title').hide();
-        }
-    };
-    onChange.apply(title.get(0));
-    title.change(onChange);
-  });
 
+    $("#other-title").hide();
+    $("#title-label").hide();
+
+    $("#title").change(function(){
+        if ($("#title").val() == "other") {
+        $("#other-title").show();
+        } else {
+        $("#other-title").hide();
+        }
+    });
+    
 ////////T-shirt section//////////   
 
 //Hide color label and select menu until theme is chosen
 //Only allow user to view and select correct color options based on theme choice, starting with 1st option from each respective list
 //Add un-selectable menu prompt instructing user to choose a T-shirt theme if none is selected, after color menu is revealed
-
-$("#colors-js-puns").hide();
-$('#design').change(function(event){
-    $("#colors-js-puns").show();
-    
-    if ($(this).val() == "js puns") {
-       
-       $('#color').children().hide();
-       $('#color').children().slice(0,3).show();
-       $('#color').val("cornflowerblue");
-    } else if ($(this).val() == "heart js"){
-      
-      $('#color').children().hide();
-      $('#color').children().slice(-3).show();
-      $('#color').val("tomato");
-    } else {
-      $('#color').children().show();
-    }
-  });
 
   $('#color').html("<option value='none'>Please select a T-shirt Theme</option>");
     var themeSelected = false;
@@ -78,43 +57,70 @@ $('#design').change(function(event){
       }
     });
 
+
 //////////Activities section/////////////
+//Don't allow user to select conflicting activities
 
- //Create new DOM element to display total cost and append it to ' .activities' section
+    $(":checkbox").change(function(){
 
-    let totalCostCalc = 0;
-    var totalCostCalcElem = $('<span></span>').html('<b>Total: $' + totalCostCalc + '</b>');
+    //Clears activity conflict messages
 
-    $('.activities').append(totalCostCalcElem);
- 
- //Update and display the total cost of the activities selected
+         $(".conflict").remove();
+         $("#activityerror").remove();
+  
+  
+    //Prevent scheduling copnflicts
 
-    $('.activities').change(function(event) {
-        const checked = event.target;
-        let cost = parseInt($(checked).attr('data-cost').replace(/\D(\d+)/, '$1'));
-    if( $(checked).is(':checked')) {
-        totalCostCalc += cost;
-        totalCostCalcElem.html('<b>Total: $' + totalCostCalc + '</b>');
-    } else {
-        totalCostCalc -= cost;
-     totalCostCalcElem.html('<b>Total: $' + totalCostCalc + '</b>');
-    }
-
-  //Don't allow user to select conflicting activities
-
-        var activitiesList = $('.activities input');
-
-        $(activitiesList).each(function(index) {
- 
-        if( $(activitiesList[index]).attr('data-day-and-time') === $(checked).attr('data-day-and-time') && checked != activitiesList[index] ) {
-            if($(activitiesList[index]).attr('disabled')) { 
-                $(activitiesList[index]).attr('disabled', false);
-            } else {
-                $(activitiesList[index]).attr('disabled', true); 
-            }
+        let jsframeworks = $("input[name='js-frameworks']");
+        let express = $("input[name='express']");
+        let jslibs= $("input[name='js-libs']");
+        let node = $("input[name='node']");
+  
+  
+    function activityConflict(activity, conflict){
+        if (activity.is(":checked")) {
+            conflict.attr("disabled", true);
+            conflict.parent().after("<b><p class='conflict'>This activity conflicts with your selection.</p></b>");
+  
+          //This will gray out options that conflict with current selection
+  
+          conflict.parent().css('color','gray');
+  
+        } else {
+          conflict.attr("disabled", false);
+          conflict.parent().css('color','#000');
+  
         }
-        });
-    });
+      }
+  
+  
+    activityConflict(jsframeworks, express);
+    activityConflict(express, jsframeworks);
+    activityConflict(jslibs, node);
+    activityConflict(node, jslibs);
+  
+  });
+  
+  //Create new DOM element to display total cost and append it to ' .activities' section
+  //Update and display the total cost of the activities selected
+
+  $(":checkbox").change(function(){
+      let total = 0;
+       $("#cost").remove();
+  
+            if ($("input[name='all']").is(":checked"))  {
+              total += 200;
+            }
+          $(".activities input:not([name='all'])").each(function(){
+              if ($(this).is(":checked")) {
+              total += 100;
+            }
+            });
+  
+      if (total > 0) {
+      $(".activities").append("<b><p id='cost'>Total activity cost: $" + total + " </p></b>");
+      }
+  });
 
 /////////Payment Info/////////
 
@@ -156,8 +162,8 @@ $('#design').change(function(event){
 
 /////////Form Validation//////////
   
- //Name field must contain at leasst one letter, 
- //If it does not pass validation the Name field text and border will turn red, error message generated
+//Name field must contain at leasst one letter, 
+//If it does not pass validation the Name field text and border will turn red, error message generated
 
     function validName() {
         const inputName = $('#name');
@@ -329,15 +335,16 @@ $('#design').change(function(event){
         }
     }
 
+     
     //Event handler listens for changes in CVV field
     //Displays error message if CVV validation is rejected
     //Displays error message if user clicks out of blank textbox (will engage before user submits form)
-
+   
     $('#cvv').on('focusout', function () {
-        validCVV();
-    })
-
-
+            validCVV();
+    });
+    
+    
     //Tests to ensure conditions for form validation on submit, preventing default behaviors
     //CC form fields only required when CC payment option is selected
 
@@ -368,9 +375,11 @@ $('#design').change(function(event){
             if (validCVV() === false) {
                 event.preventDefault();
             }
-        }
 
-    });   
-
-
+        }else {
+            alert("Registration successful! Thank you!"); //If all fields are complete, registration alert will display on submit.
+          }
+          
+          });
+    
 });

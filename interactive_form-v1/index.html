@@ -8,11 +8,8 @@
   <link rel="stylesheet" href="css/normalize.css">
 </head>
 <body>
-    <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/script.js"></script>
-    
-    
-	<div class="container">
+   
+    <div class="container">
     
     <header>
       <span>Register for</span>
@@ -40,7 +37,8 @@
           <option value="other">Other</option>  
         </select>
 
-        <input type="text" name="job_role_other" placeholder="Your Job Role" id="other-title">       
+       <label for= "other-title" id="title-label"></label>
+        <input type="text" id="other-title" name="user_title" placeholder="Your Job Role">
       
       </fieldset>
       
@@ -177,6 +175,9 @@
       
     </form>
 
-	</div>
+  </div>
+  
+  <script src="js/jquery-3.4.1.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
