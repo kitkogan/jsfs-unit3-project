@@ -18,7 +18,7 @@ $(function(){
         $("#other-title").hide();
         }
     });
-    
+
 ////////T-shirt section//////////   
 
 //Hide color label and select menu until theme is chosen
