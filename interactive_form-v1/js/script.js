@@ -24,7 +24,7 @@ $(function(){
 //Hide color label and select menu until theme is chosen
 //Only allow user to view and select correct color options based on theme choice, starting with 1st option from each respective list
 //Add un-selectable menu prompt instructing user to choose a T-shirt theme if none is selected, after color menu is revealed
-
+  $("#colors-js-puns").hide();
   $('#color').html("<option value='none'>Please select a T-shirt Theme</option>");
     var themeSelected = false;
     $( "#design").change(function() {
@@ -375,11 +375,8 @@ $(function(){
             if (validCVV() === false) {
                 event.preventDefault();
             }
-
-        }else {
-            alert("Registration successful! Thank you!"); //If all fields are complete, registration alert will display on submit.
-          }
+        }
           
-          });
+    });
     
 });
