@@ -275,7 +275,7 @@ $(function(){
             $('#cc-num').css('border-color', '#B20000');
             $('[for="cc-num"] span').remove();
             $('[for="cc-num"]').append('<span><b> Please enter a valid credit card number </b></span>').css('color', '#B20000');
-        return false;
+            return false;
             }
         }
     }
