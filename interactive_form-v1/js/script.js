@@ -254,7 +254,12 @@ $(function(){
     function validCC() {
         const regexCC = /^(?:[0-9]{13,16})?$/;
 
-        if ($('#cc-num').val().length < 13) {
+        if ($('#cc-num').val().length === 0) {
+            $('#cc-num').css('border-color', '#B20000');
+            $('[for="cc-num"] span').remove();
+            $('[for="cc-num"]').append('<span><b> Please enter a valid credit card number </b></span>').css('color', '#B20000');
+        return false;
+        } else if ($('#cc-num').val().length < 13) {
             $('#cc-num').css('border-color', '#B20000');
             $('[for="cc-num"] span').remove();
             $('[for="cc-num"]').append('<span><b> Credit card number should be at least 13 digits long </span>').css('color', '#B20000');
@@ -271,13 +276,9 @@ $(function(){
             $('[for="cc-num"] span').remove();
             $('[for="cc-num"]').css('color', '#000000');
             return true;
-        } else {
-            $('#cc-num').css('border-color', '#B20000');
-            $('[for="cc-num"] span').remove();
-            $('[for="cc-num"]').append('<span><b> Please enter a valid credit card number </b></span>').css('color', '#B20000');
-            return false;
-            }
+        
         }
+      }
     }
 
     //Event handler listens for changes in CC field
