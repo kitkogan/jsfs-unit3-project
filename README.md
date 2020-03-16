@@ -1,7 +1,9 @@
 # jsfs-unit3-project
  Interactive Form project
 
- This project focused on many of the aspects of adding functionality to web forms by using jQuery methods to enhance the supplied HTML. Students were also asked to use unobtrusive JavaScript and progressive enhancement to ensure that the critical form elements could be accessed across browsers and in instances where JavaScript was disabled or otherwise not able to run.
+Live demo not available
+
+This project focused on many of the aspects of adding functionality to web forms by using jQuery methods to enhance the supplied HTML. Students were also asked to use unobtrusive JavaScript and progressive enhancement to ensure that the critical form elements could be accessed across browsers and in instances where JavaScript was disabled or otherwise not able to run.
 
 A major component of this project involved the implementatiion of form validation, which includes use of loops, conditional commands, and event handlers to determine whether validation criteria is met.
 
